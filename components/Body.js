@@ -9,7 +9,7 @@ const Body = () => {
   return (
     <div className={wrapper.wrapper}>
       <div className={style.body}>
-        <h1 className={style.body_title}>Ближайшие подлёты</h1>
+        <h1>Ближайшие подлёты</h1>
         <div className={style.body_select_atr}>
           <div className={style.body_select}>
             Отображать расстояние: в{' '}

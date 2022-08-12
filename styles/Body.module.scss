@@ -4,14 +4,18 @@
     padding: 0 30px;
     margin-bottom: 240px;
 
-    .body_title {
+    h1 {
+      margin-bottom: 8px;
       font-weight: 700;
       font-size: 24px;
       line-height: 28px;
       color: #000000;
-    }
-    h1 {
-      margin-bottom: 16px;
+      &::after {
+        margin-top: 8px;
+        display: block;
+        content: '';
+        border: 1px solid #d7d7d7;
+      }
     }
     .body_select_atr {
       display: flex;
@@ -40,6 +44,64 @@
         display: flex;
         flex-direction: row;
         align-items: center;
+        gap: 7px;
+        .body_btn_danger_btn {
+          width: 21px;
+          height: 21px;
+        }
+        .body_btn_danger_desc {
+          font-weight: 400;
+          font-size: 16px;
+          line-height: 20px;
+          color: #000000;
+        }
+      }
+    }
+  }
+}
+
+@media (max-width: 750px) {
+  .body {
+    margin: 0 auto;
+    padding: 0 16px;
+    margin-bottom: 240px;
+
+    h1 {
+      margin-bottom: 16px;
+      font-weight: 700;
+      font-size: 24px;
+      line-height: 28px;
+      color: #000000;
+    }
+    .body_select_atr {
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-start;
+      align-items: flex-start;
+      .body_select {
+        font-weight: 400;
+        font-size: 16px;
+        line-height: 24px;
+        color: #000000;
+        margin-bottom: 8px;
+        .body_btn {
+          border: none;
+          background-color: transparent;
+          font-weight: 400;
+          font-size: 16px;
+          line-height: 24px;
+          color: #000000;
+          cursor: pointer;
+          &:hover {
+            font-weight: 700;
+          }
+        }
+      }
+      .body_btn_danger {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        flex-wrap: nowrap;
         gap: 7px;
         .body_btn_danger_btn {
           width: 21px;
