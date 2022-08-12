@@ -3,7 +3,6 @@ import style from '../styles/Head.module.scss';
 import Image from 'next/image';
 
 const Head = ({ data }) => {
-  console.log(data);
   return (
     <header className={wrapper.wrapper}>
       <div className={style.header}>
