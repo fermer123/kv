@@ -9,7 +9,10 @@ const dateNow =
   '-' +
   String(date.getDate()).padStart(2, '0');
 
-console.log(dateNow);
+//Browse the overall Asteroid data-set GET https://api.nasa.gov/neo/rest/v1/neo/browse/;
+//api.nasa.gov/neo/rest/v1/neo/3542519?api_key=DEMO_KEY
+
+https: console.log(dateNow);
 export const getServerSideProps = async (context) => {
   const pic = await fetch(
     'https://api.nasa.gov/planetary/apod?api_key=pMhhAzZ4AZEhzBRptqelqCGHLgSWfxLcvH1utW9N',
