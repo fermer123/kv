@@ -7,16 +7,16 @@ const Head = ({ data }) => {
   return (
     <header className={wrapper.wrapper}>
       <div className={style.header}>
-        {data && (
-          <Image
-            className={style.header_image}
-            src={String(data.url)}
-            alt='/'
-            objectFit='cover'
-            layout='fill'
-          />
-        )}
-
+        <div className={style.header_image}>
+          {data && (
+            <Image
+              src={String(data.url)}
+              alt='/'
+              objectFit='cover'
+              layout='fill'
+            />
+          )}
+        </div>
         <div className={style.header_pos}>
           <div className={style.header_title}>
             <div className={style.header_title_about}>ARMAGGEDON V2</div>
