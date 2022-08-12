@@ -1,3 +1,4 @@
+import Body from '../components/Body';
 import Head from '../components/Head';
 import wrapper from '../styles/Home.module.scss';
 
@@ -23,7 +24,7 @@ const Home = ({ data }) => {
   return (
     <div className={wrapper.wrapper}>
       <Head data={data} />
-      {data && Array(data).map((e) => <div key={e.date}>1</div>)}
+      <Body />
     </div>
   );
 };

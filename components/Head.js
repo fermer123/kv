@@ -21,8 +21,8 @@ const Head = ({ data }) => {
           <div className={style.header_title}>
             <div className={style.header_title_about}>ARMAGGEDON V2</div>
             <div className={style.header_button_group}>
-              <div className={style.header_button}>Астероиды</div>
-              <div className={style.header_button}>Заказ</div>
+              <button className={style.header_button}>Астероиды</button>
+              <button className={style.header_button}>Заказ</button>
             </div>
           </div>
           <div className={style.header_description}>
