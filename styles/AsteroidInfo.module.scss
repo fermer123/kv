@@ -1,0 +1,28 @@
+.AsteroidInfo {
+  display: flex;
+  flex-direction: column;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 24px;
+  color: #000000;
+
+  .AsteroidInfo_date {
+    margin-bottom: 8px;
+  }
+
+  .AsteroidInfo_body {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-gap: 11px;
+
+    .AsteroidInfo_body_info {
+      display: flex;
+      flex-direction: column;
+    }
+    .AsteroidInfo_body_name {
+      text-decoration: underline;
+    }
+    .AsteroidInfo_body_size {
+    }
+  }
+}

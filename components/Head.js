@@ -7,14 +7,16 @@ const Head = ({ data }) => {
     <header className={wrapper.wrapper}>
       <div className={style.header}>
         <div className={style.header_image}>
-          {data && (
+          {/* {data.url && (
             <Image
               src={String(data.url)}
               alt='/'
               objectFit='cover'
               layout='fill'
+              placeholder='empty'
+              priority='lazy'
             />
-          )}
+          )} */}
         </div>
         <div className={style.header_pos}>
           <div className={style.header_title}>

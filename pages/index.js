@@ -66,7 +66,9 @@ const Home = ({ data, pic }) => {
     <div className={wrapper.wrapper}>
       <Head data={pic} />
       <Body />
-      {state && state.map((e) => <AsteroidInfo key={e.id} state={e} />)}
+      <div className={wrapper.grid}>
+        {state && state.map((e) => <AsteroidInfo key={e.id} state={e} />)}
+      </div>
     </div>
   );
 };
