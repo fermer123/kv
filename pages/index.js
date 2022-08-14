@@ -44,6 +44,11 @@ export const getServerSideProps = async (context) => {
 const Home = ({ data, pic }) => {
   const { element_count, links, near_earth_objects } = data;
   const [state, setState] = useState([]);
+  const [checked, setChecked] = useState(false);
+
+  const checkbox = () => {
+    setChecked(!checked);
+  };
 
   useEffect(() => {
     const arr = [];
@@ -59,15 +64,24 @@ const Home = ({ data, pic }) => {
         }
       }
     }
-    setState(arr);
-  }, []);
+    const changeDistance = (checked) => {
+      if (checked) {
+        setState(
+          arr.filter((e) => e.is_potentially_hazardous_asteroid === true),
+        );
+      } else setState(arr);
+    };
+    changeDistance(checked);
+  }, [data, checked]);
 
   return (
     <div className={wrapper.wrapper}>
       <Head data={pic} />
-      <Body />
+      <Body checked={checked} checkbox={checkbox} />
       <div className={wrapper.grid}>
-        {state && state.map((e) => <AsteroidInfo key={e.id} state={e} />)}
+        {state.map((e) => (
+          <AsteroidInfo key={e.id} state={e} />
+        ))}
       </div>
     </div>
   );

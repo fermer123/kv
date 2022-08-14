@@ -1,11 +1,7 @@
 import wrapper from '../styles/Home.module.scss';
 import style from '../styles/Body.module.scss';
-import { useState } from 'react';
-const Body = () => {
-  const [checked, setChecked] = useState(false);
-  const checkbox = () => {
-    setChecked(!checked);
-  };
+
+const Body = ({ checked, checkbox }) => {
   return (
     <div className={wrapper.wrapper}>
       <div className={style.body}>

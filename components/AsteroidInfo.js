@@ -14,7 +14,6 @@ const AsteroidInfo = ({ state }) => {
   const { close_approach_date, miss_distance } = close_approach_data[0];
   const { estimated_diameter_max } = estimated_diameter.meters;
   const { kilometers, lunar } = miss_distance;
-  console.log(lunar);
 
   return (
     <div className={style.AsteroidInfo}>
