@@ -13,7 +13,7 @@ const AsteroidInfo = ({ state, distance }) => {
 
   const { close_approach_date, miss_distance } = close_approach_data[0];
   const { estimated_diameter_max } = estimated_diameter.meters;
-  console.log(miss_distance);
+
   return (
     <div className={style.AsteroidInfo}>
       <div className={style.AsteroidInfo_date}>{close_approach_date}</div>
@@ -37,7 +37,8 @@ const AsteroidInfo = ({ state, distance }) => {
             Ø {Math.ceil(estimated_diameter_max)} м
           </li>
           <li className={style.AsteroidInfo_body_size}>
-            ↔ {miss_distance[distance]}
+            ↔ {Math.ceil(miss_distance[distance])}{' '}
+            {distance === 'lunar' ? 'лунных орбит' : 'км'}
           </li>
           <li className={style.AsteroidInfo_body_danger}>
             {is_potentially_hazardous_asteroid ? 'Опасен' : 'Не опасен'}
