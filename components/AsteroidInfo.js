@@ -3,7 +3,7 @@ import Image from 'next/image';
 import danger from '../public/danger.jpg';
 import podlet from '../public/podlet.jpg';
 
-const AsteroidInfo = ({ state }) => {
+const AsteroidInfo = ({ state, distance }) => {
   const {
     close_approach_data,
     name,
@@ -13,8 +13,7 @@ const AsteroidInfo = ({ state }) => {
 
   const { close_approach_date, miss_distance } = close_approach_data[0];
   const { estimated_diameter_max } = estimated_diameter.meters;
-  const { kilometers, lunar } = miss_distance;
-
+  console.log(miss_distance);
   return (
     <div className={style.AsteroidInfo}>
       <div className={style.AsteroidInfo_date}>{close_approach_date}</div>
@@ -37,7 +36,9 @@ const AsteroidInfo = ({ state }) => {
           <li className={style.AsteroidInfo_body_size}>
             Ø {Math.ceil(estimated_diameter_max)} м
           </li>
-          <li className={style.AsteroidInfo_body_size}>↔ {name}</li>
+          <li className={style.AsteroidInfo_body_size}>
+            ↔ {miss_distance[distance]}
+          </li>
           <li className={style.AsteroidInfo_body_danger}>
             {is_potentially_hazardous_asteroid ? 'Опасен' : 'Не опасен'}
           </li>

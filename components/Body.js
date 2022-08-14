@@ -1,7 +1,7 @@
 import wrapper from '../styles/Home.module.scss';
 import style from '../styles/Body.module.scss';
 
-const Body = ({ checked, checkbox }) => {
+const Body = ({ checked, checkbox, checkDistanse }) => {
   return (
     <div className={wrapper.wrapper}>
       <div className={style.body}>
@@ -9,8 +9,19 @@ const Body = ({ checked, checkbox }) => {
         <div className={style.body_select_atr}>
           <div className={style.body_select}>
             Отображать расстояние: в{' '}
-            <button className={style.body_btn}>километрах</button> | в{' '}
-            <button className={style.body_btn}>лунных орбитах</button>
+            <button
+              onClick={() => checkDistanse('kilometers')}
+              className={style.body_btn}
+            >
+              километрах
+            </button>{' '}
+            | в{' '}
+            <button
+              onClick={() => checkDistanse('lunar')}
+              className={style.body_btn}
+            >
+              лунных орбитах
+            </button>
           </div>
           <div className={style.body_btn_danger}>
             <input

@@ -45,9 +45,15 @@ const Home = ({ data, pic }) => {
   const { element_count, links, near_earth_objects } = data;
   const [state, setState] = useState([]);
   const [checked, setChecked] = useState(false);
+  const [distance, setDistance] = useState('kilometers');
 
   const checkbox = () => {
     setChecked(!checked);
+  };
+
+  const checkDistanse = (value) => {
+    setDistance(value);
+    console.log(value);
   };
 
   useEffect(() => {
@@ -64,23 +70,27 @@ const Home = ({ data, pic }) => {
         }
       }
     }
-    const changeDistance = (checked) => {
+    const changeDanger = (checked) => {
       if (checked) {
         setState(
           arr.filter((e) => e.is_potentially_hazardous_asteroid === true),
         );
       } else setState(arr);
     };
-    changeDistance(checked);
-  }, [data, checked]);
+    changeDanger(checked);
+  }, [data, checked, distance]);
 
   return (
     <div className={wrapper.wrapper}>
       <Head data={pic} />
-      <Body checked={checked} checkbox={checkbox} />
+      <Body
+        checked={checked}
+        checkbox={checkbox}
+        checkDistanse={checkDistanse}
+      />
       <div className={wrapper.grid}>
         {state.map((e) => (
-          <AsteroidInfo key={e.id} state={e} />
+          <AsteroidInfo key={e.id} state={e} distance={distance} />
         ))}
       </div>
     </div>
