@@ -62,12 +62,11 @@ const Home = ({ data, pic }) => {
     setState(arr);
   }, []);
 
-  console.log(state);
   return (
     <div className={wrapper.wrapper}>
       <Head data={pic} />
       <Body />
-      {state && state.map((e) => <AsteroidInfo key={e.id} id={e.id} />)}
+      {state && state.map((e) => <AsteroidInfo key={e.id} state={e} />)}
     </div>
   );
 };
