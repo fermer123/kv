@@ -44,7 +44,6 @@ export const getServerSideProps = async (context) => {
 const Home = ({ data, pic }) => {
   const { element_count, links, near_earth_objects } = data;
   const [state, setState] = useState([]);
-  console.log(near_earth_objects);
 
   useEffect(() => {
     const arr = [];
@@ -63,18 +62,12 @@ const Home = ({ data, pic }) => {
     setState(arr);
   }, []);
 
+  console.log(state);
   return (
     <div className={wrapper.wrapper}>
       <Head data={pic} />
       <Body />
-      <ul>
-        {state &&
-          state.map((e) => (
-            <li key={e.id}>
-              <AsteroidInfo data={state} />
-            </li>
-          ))}
-      </ul>
+      {state && state.map((e) => <AsteroidInfo key={e.id} id={e.id} />)}
     </div>
   );
 };
