@@ -1,6 +1,10 @@
+import { useEffect, useState } from 'react';
 import Body from '../components/Body';
 import Head from '../components/Head';
 import wrapper from '../styles/Home.module.scss';
+import AsteroidInfo from '../components/AsteroidInfo';
+
+const key = 'pMhhAzZ4AZEhzBRptqelqCGHLgSWfxLcvH1utW9N';
 const date = new Date();
 const dateNow =
   date.getFullYear() +
@@ -9,23 +13,22 @@ const dateNow =
   '-' +
   String(date.getDate()).padStart(2, '0');
 
-//Browse the overall Asteroid data-set GET https://api.nasa.gov/neo/rest/v1/neo/browse/;
-//api.nasa.gov/neo/rest/v1/neo/3542519?api_key=DEMO_KEY
-
-https: console.log(dateNow);
 export const getServerSideProps = async (context) => {
-  const pic = await fetch(
-    'https://api.nasa.gov/planetary/apod?api_key=pMhhAzZ4AZEhzBRptqelqCGHLgSWfxLcvH1utW9N',
-  );
+  const pic = await fetch(`https://api.nasa.gov/planetary/apod?api_key=${key}`);
   const res = await pic.json();
 
   const resp = await fetch(
-    //'https://api.nasa.gov/planetary/apod?api_key=pMhhAzZ4AZEhzBRptqelqCGHLgSWfxLcvH1utW9N',
-    `https://api.nasa.gov/neo/rest/v1/feed?start_date=${dateNow}&api_key=pMhhAzZ4AZEhzBRptqelqCGHLgSWfxLcvH1utW9N`,
+    `https://api.nasa.gov/neo/rest/v1/feed?start_date=${dateNow}&api_key=${key}`,
   );
   const data = await resp.json();
 
   if (!data) {
+    return {
+      notFound: true,
+    };
+  }
+
+  if (!res) {
     return {
       notFound: true,
     };
@@ -39,10 +42,39 @@ export const getServerSideProps = async (context) => {
 };
 
 const Home = ({ data, pic }) => {
+  const { element_count, links, near_earth_objects } = data;
+  const [state, setState] = useState([]);
+  console.log(near_earth_objects);
+
+  useEffect(() => {
+    const arr = [];
+    for (let i = 0; i < Object.keys(near_earth_objects).length; i++) {
+      for (let c = 0; c < Object.keys(near_earth_objects)[i].length; c++) {
+        if (
+          near_earth_objects[Object.keys(near_earth_objects)[i]][c] !==
+          undefined
+        ) {
+          arr.push(near_earth_objects[Object.keys(near_earth_objects)[i]][c]);
+        } else {
+          break;
+        }
+      }
+    }
+    setState(arr);
+  }, []);
+
   return (
     <div className={wrapper.wrapper}>
       <Head data={pic} />
       <Body />
+      <ul>
+        {state &&
+          state.map((e) => (
+            <li key={e.id}>
+              <AsteroidInfo data={state} />
+            </li>
+          ))}
+      </ul>
     </div>
   );
 };
