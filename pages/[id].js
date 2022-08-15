@@ -23,16 +23,27 @@ export const getServerSideProps = async (context) => {
       notFound: true,
     };
   }
+
+  const pic = await fetch(`https://api.nasa.gov/planetary/apod?api_key=${key}`);
+  const res = await pic.json();
+
+  if (!res) {
+    return {
+      notFound: true,
+    };
+  }
   return {
     props: {
       data,
+      pic: res,
     },
   };
 };
 
-const Asteroid = ({ data }) => {
+const Asteroid = ({ data, pic }) => {
   return (
     <div>
+      <Head data={pic} />
       <Body all={false} />
       <AsteroidCard data={data} />
     </div>
