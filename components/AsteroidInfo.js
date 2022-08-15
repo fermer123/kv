@@ -19,9 +19,32 @@ const AsteroidInfo = ({ state }) => {
   const { close_approach_date, miss_distance } = close_approach_data[0];
   const { estimated_diameter_max } = estimated_diameter.meters;
 
+  const normalDate = (date) => {
+    const res = date.split('-').reverse();
+    const months = [
+      'jan',
+      'feb',
+      'mar',
+      'apr',
+      'may',
+      'jun',
+      'jul',
+      'aug',
+      'sep',
+      'oct',
+      'nov',
+      'dec',
+    ];
+    months.indexOf(res[1]);
+    console.log(months.findIndex(res[1]));
+    return res.join('-');
+  };
+
   return (
     <div className={style.AsteroidInfo}>
-      <div className={style.AsteroidInfo_date}>{close_approach_date}</div>
+      <div className={style.AsteroidInfo_date}>
+        {normalDate(close_approach_date)}
+      </div>
       <div className={style.AsteroidInfo_body}>
         <div className={style.AsteroidInfo_body_image}>
           {is_potentially_hazardous_asteroid ? (

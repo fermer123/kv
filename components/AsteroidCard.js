@@ -12,10 +12,6 @@ import { CustomContext } from './Context';
 //    Фильтр по опасности. И
 //    опция вывода расстояний: в километрах или расстояниях до Луны.
 
-//список всех его сближений.
-// По каждому сближению: скорость относительно Земли,
-//  время максимального сближения с Землей,
-//   расстояние до Земли, по орбите вокруг чего летит.
 const AsteroidCard = ({ data }) => {
   const { distance } = useContext(CustomContext);
   const {
@@ -24,15 +20,35 @@ const AsteroidCard = ({ data }) => {
     estimated_diameter,
     is_potentially_hazardous_asteroid,
   } = data;
-
-  const { close_approach_date, miss_distance } = close_approach_data;
   const { estimated_diameter_max } = estimated_diameter.meters;
-  const last = close_approach_data.pop().miss_distance;
-  console.log(data);
+  const lastDist = close_approach_data.pop().miss_distance;
+  const lastDate = close_approach_data.pop().close_approach_date;
+
+  const normalDate = (date) => {
+    const res = date.split('-').reverse();
+    const months = [
+      'jan',
+      'feb',
+      'mar',
+      'apr',
+      'may',
+      'jun',
+      'jul',
+      'aug',
+      'sep',
+      'oct',
+      'nov',
+      'dec',
+    ];
+    months.indexOf(res[1]);
+    return res.join('-');
+  };
+
+  console.log(normalDate(lastDate));
   return (
     <div className={wrapper.wrapper}>
       <div className={style.AsteroidInfo}>
-        <div className={style.AsteroidInfo_date}>{close_approach_date}</div>
+        <div className={style.AsteroidInfo_date}>{normalDate(lastDate)}</div>
         <div className={style.AsteroidInfo_body}>
           <div className={style.AsteroidInfo_body_image}>
             {is_potentially_hazardous_asteroid ? (
@@ -55,7 +71,7 @@ const AsteroidCard = ({ data }) => {
               Ø {Math.ceil(estimated_diameter_max)} м
             </li>
             <li className={style.AsteroidInfo_body_size}>
-              ↔ {Math.ceil(last[distance])}{' '}
+              ↔ {Math.ceil(lastDist[distance])}{' '}
               {distance === 'lunar' ? 'лунных орбит' : 'км'}
             </li>
             <li className={style.AsteroidInfo_body_danger}>
@@ -63,6 +79,7 @@ const AsteroidCard = ({ data }) => {
             </li>
           </ul>
         </div>
+        <ul className={style.close_approach_data}></ul>
       </div>
     </div>
   );
