@@ -40,7 +40,6 @@ const AsteroidCard = ({ data }) => {
       'октября',
       'ноября',
     ];
-
     res[1] =
       months[
         res[1]
@@ -48,7 +47,6 @@ const AsteroidCard = ({ data }) => {
           .filter((e) => e !== '0')
           .join()
       ];
-
     return res.join(' ');
   };
 

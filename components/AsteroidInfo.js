@@ -20,7 +20,6 @@ const AsteroidInfo = ({ state }) => {
   const { estimated_diameter_max } = estimated_diameter.meters;
   const normalDate = (date) => {
     const res = date.split('-').reverse();
-    console.log(res);
     const months = [
       'декабря',
       'января',
@@ -35,7 +34,6 @@ const AsteroidInfo = ({ state }) => {
       'октября',
       'ноября',
     ];
-
     res[1] =
       months[
         res[1]
@@ -43,10 +41,9 @@ const AsteroidInfo = ({ state }) => {
           .filter((e) => e !== '0')
           .join()
       ];
-
-    console.log(res.join('-'));
     return res.join(' ');
   };
+
   return (
     <div className={style.AsteroidInfo}>
       <div className={style.AsteroidInfo_date}>
