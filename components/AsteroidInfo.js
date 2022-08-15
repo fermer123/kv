@@ -2,9 +2,12 @@ import style from '../styles/AsteroidInfo.module.scss';
 import Image from 'next/image';
 import danger from '../public/danger.jpg';
 import podlet from '../public/podlet.jpg';
+import Link from 'next/link';
+import React from 'react';
 
 const AsteroidInfo = ({ state, distance }) => {
   const {
+    id,
     close_approach_data,
     name,
     estimated_diameter,
@@ -13,6 +16,14 @@ const AsteroidInfo = ({ state, distance }) => {
 
   const { close_approach_date, miss_distance } = close_approach_data[0];
   const { estimated_diameter_max } = estimated_diameter.meters;
+
+  const MyName = React.forwardRef(({ onClick, href }, ref) => {
+    return (
+      <a href={href} onClick={onClick} ref={ref}>
+        Click Me
+      </a>
+    );
+  });
 
   return (
     <div className={style.AsteroidInfo}>
@@ -31,8 +42,11 @@ const AsteroidInfo = ({ state, distance }) => {
             <Image src={podlet} placeholder='blur' alt='podlet' />
           )}
         </div>
+
         <ul className={style.AsteroidInfo_body_info}>
-          <li className={style.AsteroidInfo_body_name}>Астеройд {name}</li>
+          <Link href={`/${id}`}>
+            <li className={style.AsteroidInfo_body_name}>Астеройд {name}</li>
+          </Link>
           <li className={style.AsteroidInfo_body_size}>
             Ø {Math.ceil(estimated_diameter_max)} м
           </li>

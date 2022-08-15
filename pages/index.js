@@ -4,7 +4,7 @@ import Head from '../components/Head';
 import wrapper from '../styles/Home.module.scss';
 import AsteroidInfo from '../components/AsteroidInfo';
 
-const key = 'pMhhAzZ4AZEhzBRptqelqCGHLgSWfxLcvH1utW9N';
+const key = 'mQzujJfzbi1rzZeOq8XuJYgSI4P8qGevjZCYrVzZ';
 const date = new Date();
 const dateNow =
   date.getFullYear() +
@@ -13,14 +13,31 @@ const dateNow =
   '-' +
   String(date.getDate()).padStart(2, '0');
 
-export const getServerSideProps = async (context) => {
+export const getStaticProps = async () => {
   const pic = await fetch(`https://api.nasa.gov/planetary/apod?api_key=${key}`);
   const res = await pic.json();
 
   const resp = await fetch(
     `https://api.nasa.gov/neo/rest/v1/feed?start_date=${dateNow}&api_key=${key}`,
   );
+
   const data = await resp.json();
+
+  const arr = [];
+  for (let i = 0; i < Object.keys(data.near_earth_objects).length; i++) {
+    for (let c = 0; c < Object.keys(data.near_earth_objects)[i].length; c++) {
+      if (
+        data.near_earth_objects[Object.keys(data.near_earth_objects)[i]][c] !==
+        undefined
+      ) {
+        arr.push(
+          data.near_earth_objects[Object.keys(data.near_earth_objects)[i]][c],
+        );
+      } else {
+        break;
+      }
+    }
+  }
 
   if (!data) {
     return {
@@ -35,7 +52,7 @@ export const getServerSideProps = async (context) => {
   }
   return {
     props: {
-      data,
+      data: arr,
       pic: res,
     },
   };
@@ -53,29 +70,29 @@ const Home = ({ data, pic }) => {
 
   const checkDistanse = (value) => {
     setDistance(value);
-    console.log(value);
   };
 
   useEffect(() => {
-    const arr = [];
-    for (let i = 0; i < Object.keys(near_earth_objects).length; i++) {
-      for (let c = 0; c < Object.keys(near_earth_objects)[i].length; c++) {
-        if (
-          near_earth_objects[Object.keys(near_earth_objects)[i]][c] !==
-          undefined
-        ) {
-          arr.push(near_earth_objects[Object.keys(near_earth_objects)[i]][c]);
-        } else {
-          break;
-        }
-      }
-    }
+    // const arr = [];
+    // for (let i = 0; i < Object.keys(near_earth_objects).length; i++) {
+    //   console.log(Object.keys(near_earth_objects)[i]);
+    //   for (let c = 0; c < Object.keys(near_earth_objects)[i].length; c++) {
+    //     if (
+    //       near_earth_objects[Object.keys(near_earth_objects)[i]][c] !==
+    //       undefined
+    //     ) {
+    //       arr.push(near_earth_objects[Object.keys(near_earth_objects)[i]][c]);
+    //     } else {
+    //       break;
+    //     }
+    //   }
+    // }
     const changeDanger = (checked) => {
       if (checked) {
         setState(
-          arr.filter((e) => e.is_potentially_hazardous_asteroid === true),
+          data.filter((e) => e.is_potentially_hazardous_asteroid === true),
         );
-      } else setState(arr);
+      } else setState(data);
     };
     changeDanger(checked);
   }, [data, checked, distance]);
@@ -89,9 +106,10 @@ const Home = ({ data, pic }) => {
         checkDistanse={checkDistanse}
       />
       <div className={wrapper.grid}>
-        {state.map((e) => (
-          <AsteroidInfo key={e.id} state={e} distance={distance} />
-        ))}
+        {state &&
+          state.map((e) => (
+            <AsteroidInfo key={e.id} state={e} distance={distance} />
+          ))}
       </div>
     </div>
   );
