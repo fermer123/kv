@@ -13,7 +13,6 @@ const dateNow =
 
 export const getServerSideProps = async (context) => {
   const { id } = context.params;
-  console.log(id);
   const resp = await fetch(
     `https://api.nasa.gov/neo/rest/v1/neo/${id}?api_key=${key}`,
   );
@@ -26,7 +25,6 @@ export const getServerSideProps = async (context) => {
 
   const pic = await fetch(`https://api.nasa.gov/planetary/apod?api_key=${key}`);
   const res = await pic.json();
-
   if (!res) {
     return {
       notFound: true,
