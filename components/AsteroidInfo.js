@@ -18,28 +18,35 @@ const AsteroidInfo = ({ state }) => {
 
   const { close_approach_date, miss_distance } = close_approach_data[0];
   const { estimated_diameter_max } = estimated_diameter.meters;
-
   const normalDate = (date) => {
     const res = date.split('-').reverse();
+    console.log(res);
     const months = [
-      'jan',
-      'feb',
-      'mar',
-      'apr',
-      'may',
-      'jun',
-      'jul',
-      'aug',
-      'sep',
-      'oct',
-      'nov',
-      'dec',
+      'декабря',
+      'января',
+      'февраля',
+      'марта',
+      'апреля',
+      'мая',
+      'июня',
+      'июля',
+      'августа',
+      'сентября',
+      'октября',
+      'ноября',
     ];
-    months.indexOf(res[1]);
-    console.log(months.findIndex(res[1]));
-    return res.join('-');
-  };
 
+    res[1] =
+      months[
+        res[1]
+          .split('')
+          .filter((e) => e !== '0')
+          .join()
+      ];
+
+    console.log(res.join('-'));
+    return res.join(' ');
+  };
   return (
     <div className={style.AsteroidInfo}>
       <div className={style.AsteroidInfo_date}>

@@ -27,24 +27,31 @@ const AsteroidCard = ({ data }) => {
   const normalDate = (date) => {
     const res = date.split('-').reverse();
     const months = [
-      'jan',
-      'feb',
-      'mar',
-      'apr',
-      'may',
-      'jun',
-      'jul',
-      'aug',
-      'sep',
-      'oct',
-      'nov',
-      'dec',
+      'декабря',
+      'января',
+      'февраля',
+      'марта',
+      'апреля',
+      'мая',
+      'июня',
+      'июля',
+      'августа',
+      'сентября',
+      'октября',
+      'ноября',
     ];
-    months.indexOf(res[1]);
-    return res.join('-');
+
+    res[1] =
+      months[
+        res[1]
+          .split('')
+          .filter((e) => e !== '0')
+          .join()
+      ];
+
+    return res.join(' ');
   };
 
-  console.log(normalDate(lastDate));
   return (
     <div className={wrapper.wrapper}>
       <div className={style.AsteroidInfo}>
