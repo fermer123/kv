@@ -43,7 +43,7 @@ export const getServerSideProps = async (context) => {
 const Asteroid = ({ data, pic }) => {
   return (
     <div>
-      <Head data={pic} />
+      <Head data={pic} onclick={true} />
       <Body all={false} />
       <AsteroidCard data={data} />
     </div>

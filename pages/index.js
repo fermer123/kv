@@ -78,12 +78,7 @@ const Home = ({ data, pic }) => {
   return (
     <div className={wrapper.wrapper}>
       <Head data={pic} />
-      <Body
-        checked={checked}
-        checkbox={checkbox}
-        checkDistanse={checkDistanse}
-        all={true}
-      />
+      <Body all={true} />
       <div className={wrapper.grid}>
         {state &&
           state.map((e) => (

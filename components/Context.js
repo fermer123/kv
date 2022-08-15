@@ -9,7 +9,6 @@ export const Context = ({ children }) => {
   const checkbox = () => {
     setChecked(!checked);
   };
-
   const checkDistanse = (value) => {
     setDistance(value);
   };
