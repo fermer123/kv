@@ -1,8 +1,9 @@
-import { useEffect, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import Body from '../components/Body';
 import Head from '../components/Head';
 import wrapper from '../styles/Home.module.scss';
 import AsteroidInfo from '../components/AsteroidInfo';
+import { CustomContext } from '../components/Context';
 
 const key = 'mQzujJfzbi1rzZeOq8XuJYgSI4P8qGevjZCYrVzZ';
 const date = new Date();
@@ -59,34 +60,10 @@ export const getStaticProps = async () => {
 };
 
 const Home = ({ data, pic }) => {
-  const { element_count, links, near_earth_objects } = data;
-  const [state, setState] = useState([]);
-  const [checked, setChecked] = useState(false);
-  const [distance, setDistance] = useState('kilometers');
-
-  const checkbox = () => {
-    setChecked(!checked);
-  };
-
-  const checkDistanse = (value) => {
-    setDistance(value);
-  };
+  const { state, checked, distance, checkbox, checkDistanse, setState } =
+    useContext(CustomContext);
 
   useEffect(() => {
-    // const arr = [];
-    // for (let i = 0; i < Object.keys(near_earth_objects).length; i++) {
-    //   console.log(Object.keys(near_earth_objects)[i]);
-    //   for (let c = 0; c < Object.keys(near_earth_objects)[i].length; c++) {
-    //     if (
-    //       near_earth_objects[Object.keys(near_earth_objects)[i]][c] !==
-    //       undefined
-    //     ) {
-    //       arr.push(near_earth_objects[Object.keys(near_earth_objects)[i]][c]);
-    //     } else {
-    //       break;
-    //     }
-    //   }
-    // }
     const changeDanger = (checked) => {
       if (checked) {
         setState(
@@ -94,6 +71,7 @@ const Home = ({ data, pic }) => {
         );
       } else setState(data);
     };
+
     changeDanger(checked);
   }, [data, checked, distance]);
 
@@ -104,6 +82,7 @@ const Home = ({ data, pic }) => {
         checked={checked}
         checkbox={checkbox}
         checkDistanse={checkDistanse}
+        all={true}
       />
       <div className={wrapper.grid}>
         {state &&

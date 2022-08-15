@@ -1,4 +1,6 @@
 import AsteroidCard from '../components/AsteroidCard';
+import Body from '../components/Body';
+import Head from '../components/Head';
 
 const key = 'mQzujJfzbi1rzZeOq8XuJYgSI4P8qGevjZCYrVzZ';
 const date = new Date();
@@ -31,6 +33,7 @@ export const getServerSideProps = async (context) => {
 const Asteroid = ({ data }) => {
   return (
     <div>
+      <Body all={false} />
       <AsteroidCard data={data} />
     </div>
   );

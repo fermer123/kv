@@ -3,10 +3,18 @@ import style from '../styles/AsteroidCard.module.scss';
 import danger from '../public/danger.jpg';
 import podlet from '../public/podlet.jpg';
 import Image from 'next/image';
+import { useContext } from 'react';
+import { CustomContext } from './Context';
+
+// По каждому астероиду: название, размер, оценка опасности,
+//  как близко будет к Земле, точная дата максимального
+//   подлёта. Иконка сближения в зависимости от опасности.
+//    Фильтр по опасности. И
+//    опция вывода расстояний: в километрах или расстояниях до Луны.
 
 const AsteroidCard = ({ data }) => {
+  const { distance } = useContext(CustomContext);
   const {
-    id,
     close_approach_data,
     name,
     estimated_diameter,
@@ -15,7 +23,7 @@ const AsteroidCard = ({ data }) => {
 
   const { close_approach_date, miss_distance } = close_approach_data;
   const { estimated_diameter_max } = estimated_diameter.meters;
-  console.log(data);
+  const last = close_approach_data.pop().miss_distance;
 
   return (
     <div className={wrapper.wrapper}>
@@ -43,8 +51,8 @@ const AsteroidCard = ({ data }) => {
               Ø {Math.ceil(estimated_diameter_max)} м
             </li>
             <li className={style.AsteroidInfo_body_size}>
-              {/* ↔ {Math.ceil(miss_distance['distance'])}{' '} */}
-              {/* {distance === 'lunar' ? 'лунных орбит' : 'км'} */}
+              ↔ {Math.ceil(last[distance])}{' '}
+              {distance === 'lunar' ? 'лунных орбит' : 'км'}
             </li>
             <li className={style.AsteroidInfo_body_danger}>
               {is_potentially_hazardous_asteroid ? 'Опасен' : 'Не опасен'}

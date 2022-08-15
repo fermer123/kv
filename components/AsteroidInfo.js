@@ -3,9 +3,11 @@ import Image from 'next/image';
 import danger from '../public/danger.jpg';
 import podlet from '../public/podlet.jpg';
 import Link from 'next/link';
-import React from 'react';
+import React, { useContext } from 'react';
+import { CustomContext } from './Context';
 
-const AsteroidInfo = ({ state, distance }) => {
+const AsteroidInfo = ({ state }) => {
+  const { distance } = useContext(CustomContext);
   const {
     id,
     close_approach_data,
