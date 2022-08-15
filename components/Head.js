@@ -7,7 +7,7 @@ const Head = ({ data }) => {
     <header className={wrapper.wrapper}>
       <div className={style.header}>
         <div className={style.header_image}>
-          {/* {data.url && (
+          {data.url && (
             <Image
               src={String(data.url)}
               alt='/'
@@ -16,7 +16,7 @@ const Head = ({ data }) => {
               placeholder='empty'
               priority='lazy'
             />
-          )} */}
+          )}
         </div>
         <div className={style.header_pos}>
           <div className={style.header_title}>
