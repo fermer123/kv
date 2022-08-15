@@ -15,24 +15,7 @@ export const getServerSideProps = async (context) => {
   const resp = await fetch(
     `https://api.nasa.gov/neo/rest/v1/neo/${id}?api_key=${key}`,
   );
-
   const data = await resp.json();
-  // const arr = [];
-  // for (let i = 0; i < Object.keys(data.near_earth_objects).length; i++) {
-  //   for (let c = 0; c < Object.keys(data.near_earth_objects)[i].length; c++) {
-  //     if (
-  //       data.near_earth_objects[Object.keys(data.near_earth_objects)[i]][c] !==
-  //       undefined
-  //     ) {
-  //       arr.push(
-  //         data.near_earth_objects[Object.keys(data.near_earth_objects)[i]][c],
-  //       );
-  //     } else {
-  //       break;
-  //     }
-  //   }
-  // }
-
   if (!data) {
     return {
       notFound: true,

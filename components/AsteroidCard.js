@@ -1,6 +1,6 @@
 const AsteroidCard = ({ data }) => {
   console.log(data);
-  return <div></div>;
+  return <div>{data.name}</div>;
 };
 
 export default AsteroidCard;

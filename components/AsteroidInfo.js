@@ -17,14 +17,6 @@ const AsteroidInfo = ({ state, distance }) => {
   const { close_approach_date, miss_distance } = close_approach_data[0];
   const { estimated_diameter_max } = estimated_diameter.meters;
 
-  const MyName = React.forwardRef(({ onClick, href }, ref) => {
-    return (
-      <a href={href} onClick={onClick} ref={ref}>
-        Click Me
-      </a>
-    );
-  });
-
   return (
     <div className={style.AsteroidInfo}>
       <div className={style.AsteroidInfo_date}>{close_approach_date}</div>
@@ -44,7 +36,11 @@ const AsteroidInfo = ({ state, distance }) => {
         </div>
 
         <ul className={style.AsteroidInfo_body_info}>
-          <Link href={`/${id}`}>
+          <Link
+            href={{
+              pathname: `/${id}`,
+            }}
+          >
             <li className={style.AsteroidInfo_body_name}>Астеройд {name}</li>
           </Link>
           <li className={style.AsteroidInfo_body_size}>
