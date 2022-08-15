@@ -1,6 +1,7 @@
 import wrapper from '../styles/Home.module.scss';
 import style from '../styles/Head.module.scss';
 import Image from 'next/image';
+import Link from 'next/link';
 
 const Head = ({ data }) => {
   return (
@@ -22,7 +23,9 @@ const Head = ({ data }) => {
           <div className={style.header_title}>
             <div className={style.header_title_about}>ARMAGGEDON V2</div>
             <div className={style.header_button_group}>
-              <button className={style.header_button}>Астероиды</button>
+              <Link href='/'>
+                <button className={style.header_button}>Астероиды</button>
+              </Link>
               <button className={style.header_button}>Заказ</button>
             </div>
           </div>

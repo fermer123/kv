@@ -12,6 +12,10 @@ import { CustomContext } from './Context';
 //    Фильтр по опасности. И
 //    опция вывода расстояний: в километрах или расстояниях до Луны.
 
+//список всех его сближений.
+// По каждому сближению: скорость относительно Земли,
+//  время максимального сближения с Землей,
+//   расстояние до Земли, по орбите вокруг чего летит.
 const AsteroidCard = ({ data }) => {
   const { distance } = useContext(CustomContext);
   const {
@@ -24,7 +28,7 @@ const AsteroidCard = ({ data }) => {
   const { close_approach_date, miss_distance } = close_approach_data;
   const { estimated_diameter_max } = estimated_diameter.meters;
   const last = close_approach_data.pop().miss_distance;
-
+  console.log(data);
   return (
     <div className={wrapper.wrapper}>
       <div className={style.AsteroidInfo}>

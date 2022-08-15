@@ -5,7 +5,7 @@ import { CustomContext } from './Context';
 
 const Body = ({ all }) => {
   const { checked, checkbox, checkDistanse } = useContext(CustomContext);
-  console.log(all);
+
   return (
     <div className={wrapper.wrapper}>
       <div className={style.body}>
