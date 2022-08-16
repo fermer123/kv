@@ -4,6 +4,7 @@ import Head from '../components/Head';
 import wrapper from '../styles/Home.module.scss';
 import AsteroidInfo from '../components/AsteroidInfo';
 import { CustomContext } from '../components/Context';
+import Footer from '../components/Footer';
 
 const key = 'mQzujJfzbi1rzZeOq8XuJYgSI4P8qGevjZCYrVzZ';
 const date = new Date();
@@ -60,31 +61,55 @@ export const getStaticProps = async () => {
 };
 
 const Home = ({ data, pic }) => {
-  const { state, checked, distance, checkbox, checkDistanse, setState } =
-    useContext(CustomContext);
+  const { checked, distance, currPage } = useContext(CustomContext);
+  const [itemsPerPage, setitemsPerPage] = useState(6);
+  const lastItemIndex = currPage * itemsPerPage;
+  const firstItemIndex = lastItemIndex - itemsPerPage;
+  const [fetch, setFetch] = useState(false);
+
+  const scrollHandler = (e) => {
+    if (
+      e.target.documentElement.scrollHeight -
+        (e.target.documentElement.scrollTop + window.innerHeight) <
+      100
+    ) {
+      setFetch(true);
+    }
+  };
 
   useEffect(() => {
-    const changeDanger = (checked) => {
-      if (checked) {
-        setState(
-          data.filter((e) => e.is_potentially_hazardous_asteroid === true),
-        );
-      } else setState(data);
+    document.addEventListener('scroll', scrollHandler);
+    return function () {
+      document.removeEventListener('scroll', scrollHandler);
     };
+  }, []);
 
-    changeDanger(checked);
-  }, [data, checked, distance]);
+  useEffect(() => {
+    if (fetch) {
+      setitemsPerPage((itemsPerPage += itemsPerPage));
+    }
+    setFetch(false);
+  }, [fetch]);
+  const currentItem = data.slice(firstItemIndex, lastItemIndex);
 
   return (
     <div className={wrapper.wrapper}>
       <Head data={pic} />
       <Body all={true} />
       <div className={wrapper.grid}>
-        {state &&
-          state.map((e) => (
-            <AsteroidInfo key={e.id} state={e} distance={distance} />
-          ))}
+        {checked
+          ? currentItem
+              .filter((e) => {
+                return e.is_potentially_hazardous_asteroid === true;
+              })
+              .map((e) => (
+                <AsteroidInfo key={e.id} state={e} distance={distance} />
+              ))
+          : currentItem.map((e) => (
+              <AsteroidInfo key={e.id} state={e} distance={distance} />
+            ))}
       </div>
+      <Footer />
     </div>
   );
 };

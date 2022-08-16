@@ -1,10 +1,10 @@
-import { createContext, useEffect, useState } from 'react';
+import { createContext, useState } from 'react';
 
 export const CustomContext = createContext();
 export const Context = ({ children }) => {
-  const [state, setState] = useState([]);
   const [checked, setChecked] = useState(false);
   const [distance, setDistance] = useState('kilometers');
+  const [currPage, setCurrPage] = useState(1);
 
   const checkbox = () => {
     setChecked(!checked);
@@ -14,14 +14,13 @@ export const Context = ({ children }) => {
   };
 
   const value = {
-    state,
-    setState,
-    checked,
     setChecked,
     distance,
     setDistance,
     checkbox,
     checkDistanse,
+    currPage,
+    setCurrPage,
   };
   return (
     <CustomContext.Provider value={value}>{children}</CustomContext.Provider>
