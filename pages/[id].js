@@ -42,7 +42,7 @@ const Asteroid = ({ data, pic }) => {
   return (
     <div>
       <Head data={pic} onclick={true} />
-      <Body all={false} />
+      <Body />
       <AsteroidCard data={data} />
     </div>
   );

@@ -6,18 +6,16 @@ export const Context = ({ children }) => {
   const [distance, setDistance] = useState('kilometers');
   const [currPage, setCurrPage] = useState(1);
 
-  const checkbox = () => {
-    setChecked(!checked);
-  };
   const checkDistanse = (value) => {
     setDistance(value);
   };
 
   const value = {
+    checked,
     setChecked,
     distance,
     setDistance,
-    checkbox,
+
     checkDistanse,
     currPage,
     setCurrPage,

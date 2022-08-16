@@ -90,18 +90,17 @@ const Home = ({ data, pic }) => {
     }
     setFetch(false);
   }, [fetch]);
+
   const currentItem = data.slice(firstItemIndex, lastItemIndex);
 
   return (
     <div className={wrapper.wrapper}>
       <Head data={pic} />
-      <Body all={true} />
+      <Body />
       <div className={wrapper.grid}>
         {checked
           ? currentItem
-              .filter((e) => {
-                return e.is_potentially_hazardous_asteroid === true;
-              })
+              .filter((e) => e.is_potentially_hazardous_asteroid === true)
               .map((e) => (
                 <AsteroidInfo key={e.id} state={e} distance={distance} />
               ))

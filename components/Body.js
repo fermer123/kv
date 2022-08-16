@@ -3,8 +3,8 @@ import style from '../styles/Body.module.scss';
 import { useContext } from 'react';
 import { CustomContext } from './Context';
 
-const Body = ({ all }) => {
-  const { checked, checkbox, checkDistanse } = useContext(CustomContext);
+const Body = () => {
+  const { checked, setChecked, checkDistanse } = useContext(CustomContext);
 
   return (
     <div className={wrapper.wrapper}>
@@ -27,21 +27,18 @@ const Body = ({ all }) => {
               лунных орбитах
             </button>
           </div>
-          {all ? (
-            <div className={style.body_btn_danger}>
-              <input
-                className={style.body_btn_danger_btn}
-                type='checkbox'
-                value={checked}
-                onChange={checkbox}
-              />
-              <div className={style.body_btn_danger_desc}>
-                Показать только опасные
-              </div>
+
+          <div className={style.body_btn_danger}>
+            <input
+              className={style.body_btn_danger_btn}
+              type='checkbox'
+              value={checked}
+              onChange={() => setChecked(!checked)}
+            />
+            <div className={style.body_btn_danger_desc}>
+              Показать только опасные
             </div>
-          ) : (
-            ' '
-          )}
+          </div>
         </div>
       </div>
     </div>
