@@ -11,7 +11,36 @@ const Asteroid = ({ data }) => {
   //   относительно Земли, // время максимального сближения с Землей, //
   //   расстояние до Земли, по орбите вокруг чего летит.
 
-  return <div className={wrapper.wrapper}></div>;
+  const normalDate = (date) => {
+    const res = date.split('-').reverse();
+    const months = {
+      1: 'января',
+      2: 'февраля',
+      3: 'марта',
+      4: 'апреля',
+      5: 'мая',
+      6: 'июня',
+      7: 'июля',
+      8: 'августа',
+      9: 'сентября',
+      10: 'октября',
+      11: 'ноября',
+      12: 'декабря',
+    };
+
+    res[1] =
+      months[
+        res[1]
+          .split('')
+          .filter((e) => e !== '0')
+          .join()
+      ];
+
+    return res.join(' ');
+  };
+
+  console.log(data);
+  return <div className={style.AsteroidInfo}>//</div>;
 };
 
 export default Asteroid;

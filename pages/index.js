@@ -61,11 +61,11 @@ export const getStaticProps = async () => {
 };
 
 const Home = ({ data, pic }) => {
-  const { checked, distance, currPage } = useContext(CustomContext);
-  const [itemsPerPage, setitemsPerPage] = useState(9);
+  const { checked, distance, fetch, setFetch, itemsPerPage, setitemsPerPage } =
+    useContext(CustomContext);
+
   const lastItemIndex = itemsPerPage;
   const firstItemIndex = lastItemIndex - itemsPerPage;
-  const [fetch, setFetch] = useState(false);
 
   const scrollHandler = (e) => {
     if (
