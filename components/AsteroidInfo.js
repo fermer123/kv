@@ -40,7 +40,7 @@ const AsteroidInfo = ({ state }) => {
         res[1]
           .split('')
           .filter((e) => e !== '0')
-          .join()
+          .join('')
       ];
 
     return res.join(' ');

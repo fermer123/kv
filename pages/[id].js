@@ -1,5 +1,7 @@
+import { useContext, useEffect } from 'react';
 import AsteroidCard from '../components/AsteroidCard';
 import Body from '../components/Body';
+import { CustomContext } from '../components/Context';
 import Head from '../components/Head';
 
 const key = 'mQzujJfzbi1rzZeOq8XuJYgSI4P8qGevjZCYrVzZ';
@@ -43,7 +45,9 @@ const Asteroid = ({ data, pic }) => {
     <div>
       <Head data={pic} onclick={true} />
       <Body />
-      <AsteroidCard data={data} />
+      {Array(data).map((e) => (
+        <AsteroidCard key={e.id} data={e} />
+      ))}
     </div>
   );
 };
