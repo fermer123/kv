@@ -45,9 +45,7 @@ const Asteroid = ({ data, pic }) => {
     <div>
       <Head data={pic} onclick={true} />
       <Body />
-      {Array(data).map((e) => (
-        <AsteroidCard key={e.id} data={e} />
-      ))}
+      <AsteroidCard data={data} />
     </div>
   );
 };

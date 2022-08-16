@@ -34,6 +34,13 @@ const AsteroidCard = ({ data }) => {
     return res.join(' ');
   };
 
+  const time = (date) => {
+    const res = date.split('-');
+    const time = res[2].split(' ');
+
+    return time[1];
+  };
+
   const { fetch, setFetch, itemsPerPage, setitemsPerPage } =
     useContext(CustomContext);
   const lastItemIndex = itemsPerPage;
@@ -95,7 +102,7 @@ const AsteroidCard = ({ data }) => {
                 <Image src={podlet} placeholder='blur' alt='podlet' />
               )}
             </div>
-            <ul className={style.AsteroidInfo_body_info}>
+            <ul className={style.AsteroidInfo_body_info_app}>
               <li className={style.AsteroidInfo_body_name}>
                 Астеройд {data.name}
               </li>
@@ -109,6 +116,18 @@ const AsteroidCard = ({ data }) => {
               <li className={style.AsteroidInfo_body_size}>
                 ↔ {Math.ceil(e.miss_distance[distance])}{' '}
                 {distance === 'lunar' ? 'лунных орбит' : 'км'}
+              </li>
+              <li className={style.AsteroidInfo_body_danger}>
+                {data.is_potentially_hazardous_asteroid
+                  ? 'Опасен'
+                  : 'Не опасен'}
+              </li>
+            </ul>
+            <ul className={style.AsteroidInfo_body_info_opt}>
+              <li className={style.orbiting_body}>Орбита {e.orbiting_body}</li>
+
+              <li className={style.time}>
+                Время {time(e.close_approach_date_full)}
               </li>
               <li className={style.AsteroidInfo_body_danger}>
                 {data.is_potentially_hazardous_asteroid
