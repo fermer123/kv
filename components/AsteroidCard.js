@@ -6,12 +6,6 @@ import Image from 'next/image';
 import { useContext } from 'react';
 import { CustomContext } from './Context';
 
-// По каждому астероиду: название, размер, оценка опасности,
-//  как близко будет к Земле, точная дата максимального
-//   подлёта. Иконка сближения в зависимости от опасности.
-//    Фильтр по опасности. И
-//    опция вывода расстояний: в километрах или расстояниях до Луны.
-
 const AsteroidCard = ({ data }) => {
   const { distance } = useContext(CustomContext);
   const {
@@ -48,7 +42,6 @@ const AsteroidCard = ({ data }) => {
           .filter((e) => e !== '0')
           .join()
       ];
-    const rep = res.join();
 
     return res.join(' ');
   };

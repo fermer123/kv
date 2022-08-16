@@ -42,7 +42,6 @@ const AsteroidInfo = ({ state }) => {
           .filter((e) => e !== '0')
           .join()
       ];
-    const rep = res.join();
 
     return res.join(' ');
   };

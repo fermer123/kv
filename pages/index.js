@@ -62,8 +62,8 @@ export const getStaticProps = async () => {
 
 const Home = ({ data, pic }) => {
   const { checked, distance, currPage } = useContext(CustomContext);
-  const [itemsPerPage, setitemsPerPage] = useState(6);
-  const lastItemIndex = currPage * itemsPerPage;
+  const [itemsPerPage, setitemsPerPage] = useState(9);
+  const lastItemIndex = itemsPerPage;
   const firstItemIndex = lastItemIndex - itemsPerPage;
   const [fetch, setFetch] = useState(false);
 
@@ -71,7 +71,7 @@ const Home = ({ data, pic }) => {
     if (
       e.target.documentElement.scrollHeight -
         (e.target.documentElement.scrollTop + window.innerHeight) <
-      100
+      80
     ) {
       setFetch(true);
     }
@@ -86,7 +86,7 @@ const Home = ({ data, pic }) => {
 
   useEffect(() => {
     if (fetch) {
-      setitemsPerPage((itemsPerPage += itemsPerPage));
+      setitemsPerPage((itemsPerPage += 3));
     }
     setFetch(false);
   }, [fetch]);
