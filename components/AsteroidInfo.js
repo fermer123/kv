@@ -20,20 +20,21 @@ const AsteroidInfo = ({ state }) => {
   const { estimated_diameter_max } = estimated_diameter.meters;
   const normalDate = (date) => {
     const res = date.split('-').reverse();
-    const months = [
-      'декабря',
-      'января',
-      'февраля',
-      'марта',
-      'апреля',
-      'мая',
-      'июня',
-      'июля',
-      'августа',
-      'сентября',
-      'октября',
-      'ноября',
-    ];
+    const months = {
+      1: 'января',
+      2: 'февраля',
+      3: 'марта',
+      4: 'апреля',
+      5: 'мая',
+      6: 'июня',
+      7: 'июля',
+      8: 'августа',
+      9: 'сентября',
+      10: 'октября',
+      11: 'ноября',
+      12: 'декабря',
+    };
+
     res[1] =
       months[
         res[1]
@@ -41,6 +42,8 @@ const AsteroidInfo = ({ state }) => {
           .filter((e) => e !== '0')
           .join()
       ];
+    const rep = res.join();
+
     return res.join(' ');
   };
 
