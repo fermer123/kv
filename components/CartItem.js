@@ -41,7 +41,6 @@ const CartItem = ({ data }) => {
             {danger ? 'Опасен' : 'Не опасен'}
           </li>
         </ul>
-        <button onClick={() => removeItem()}>as</button>
       </div>
     </div>
   );

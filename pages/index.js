@@ -104,7 +104,7 @@ const Home = ({ data, pic }) => {
               .map((e) => <AsteroidInfo key={e.id} data={e} />)
           : currentItem.map((e) => <AsteroidInfo key={e.id} data={e} />)}
       </div>
-      <Footer cart={false} />
+      <Footer cart={true} />
     </div>
   );
 };
