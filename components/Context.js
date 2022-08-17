@@ -6,6 +6,7 @@ export const Context = ({ children }) => {
   const [distance, setDistance] = useState('kilometers');
   const [itemsPerPage, setitemsPerPage] = useState(9);
   const [fetch, setFetch] = useState(false);
+  const [cart, setCart] = useState([]);
 
   const checkDistanse = (value) => {
     setDistance(value);
@@ -44,6 +45,12 @@ export const Context = ({ children }) => {
       .split('')
       .map((e, idx) => (idx % 3 !== 2 ? e : e + ' '))
       .join('');
+  };
+
+  const addCart = (item) => {
+    // const sameItem = cart.findIndex((e) => e.id === item.id);
+
+    setCart([...cart, item]);
   };
 
   const value = {

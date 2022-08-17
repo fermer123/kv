@@ -1,5 +1,6 @@
 import AsteroidCard from '../components/AsteroidCard';
 import Body from '../components/Body';
+import Footer from '../components/Footer';
 
 import Head from '../components/Head';
 import wrapper from '../styles/Home.module.scss';
@@ -46,6 +47,7 @@ const Asteroid = ({ data, pic }) => {
       <Head data={pic} onclick={true} />
       <Body />
       <AsteroidCard data={data} />
+      <Footer />
     </div>
   );
 };
