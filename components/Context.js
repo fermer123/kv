@@ -60,7 +60,6 @@ export const Context = ({ children }) => {
   const addCart = (item) => {
     // const sameItem = cart.findIndex((e) => e.id === item.id);
     setCart([...cart, item]);
-    console.log(cart);
   };
 
   const value = {
@@ -76,6 +75,7 @@ export const Context = ({ children }) => {
     normalDate,
     space,
     addCart,
+    cart,
   };
   return (
     <CustomContext.Provider value={value}>{children}</CustomContext.Provider>

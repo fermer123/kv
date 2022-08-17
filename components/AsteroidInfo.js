@@ -64,11 +64,11 @@ const AsteroidInfo = ({ data }) => {
           onClick={() =>
             addCart({
               id,
-              // name: name,
-              // date: normalDate(close_approach_date),
-              // danger: is_potentially_hazardous_asteroid,
-              // diametr: Math.ceil(estimated_diameter_max),
-              // velocity: space(Math.ceil(miss_distance[distance])),
+              name,
+              date: normalDate(close_approach_date),
+              danger: is_potentially_hazardous_asteroid,
+              diametr: estimated_diameter_max,
+              dist: miss_distance,
             })
           }
         >
