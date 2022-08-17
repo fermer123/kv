@@ -38,7 +38,9 @@ const Head = ({ data, onclick }) => {
                   <button className={style.header_button}>Астероиды</button>
                 )}
               </Link>
-              <button className={style.header_button}>Заказ</button>
+              <Link href='/cart'>
+                <button className={style.header_button}>Заказ</button>
+              </Link>
             </div>
           </div>
           <div className={style.header_description}>
