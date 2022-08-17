@@ -4,17 +4,13 @@ import style from '../styles/Footer.module.scss';
 const Footer = (cart) => {
   console.log(cart);
   return (
-    <div className={wrapper.wrapper}>
-      {cart ? (
-        <footer className={style.footer}>
-          Заказ бригады им. Брюса Уиллиса.
-        </footer>
+    <footer className={wrapper.wrapper}>
+      {cart === true ? (
+        <div className={style.footer}>Заказ бригады им. Брюса Уиллиса.</div>
       ) : (
-        <footer className={style.footer}>
-          2022 © Все права и планета защищены
-        </footer>
+        <div className={style.footer}>2022 © Все права и планета защищены</div>
       )}
-    </div>
+    </footer>
   );
 };
 

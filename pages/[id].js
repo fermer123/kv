@@ -47,7 +47,7 @@ const Asteroid = ({ data, pic }) => {
       <Head data={pic} onclick={true} />
       <Body />
       <AsteroidCard data={data} />
-      <Footer />
+      <Footer cart={false} />
     </div>
   );
 };
