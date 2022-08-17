@@ -60,12 +60,13 @@ const Cart = ({ pic }) => {
     <div className={wrapper.wrapper}>
       <Head data={pic} />
       <Body />
-      {checked
-        ? currentItem
-            .filter((e) => e.danger === true)
-            .map((e) => <CartItem key={e.id} data={e} />)
-        : currentItem.map((e) => <CartItem key={e.id} data={e} />)}
-
+      <div className={wrapper.grid}>
+        {checked
+          ? currentItem
+              .filter((e) => e.danger === true)
+              .map((e) => <CartItem key={e.id} data={e} />)
+          : currentItem.map((e) => <CartItem key={e.id} data={e} />)}
+      </div>
       <Footer cart={true} />
     </div>
   );

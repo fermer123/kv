@@ -6,7 +6,7 @@ import { useContext } from 'react';
 import { CustomContext } from './Context';
 
 const CartItem = ({ data }) => {
-  const { distance, space } = useContext(CustomContext);
+  const { distance, space, removeItem } = useContext(CustomContext);
   const { id, date, danger, diametr, dist } = data;
 
   return (
@@ -41,6 +41,7 @@ const CartItem = ({ data }) => {
             {danger ? 'Опасен' : 'Не опасен'}
           </li>
         </ul>
+        <button onClick={() => removeItem()}>as</button>
       </div>
     </div>
   );

@@ -61,6 +61,13 @@ export const Context = ({ children }) => {
     // const sameItem = cart.findIndex((e) => e.id === item.id);
     setCart([...cart, item]);
   };
+  const removeItem = () => {
+    localStorage.removeItem('cart');
+    setCart([]);
+    alert(
+      'Бригада им. Брюса Уиллиса на выбранные астероиды. Бригада будет доставлена на астероид в нужный момент и выполнит свою нелёгкую работу',
+    );
+  };
 
   const value = {
     checked,
@@ -76,6 +83,7 @@ export const Context = ({ children }) => {
     space,
     addCart,
     cart,
+    removeItem,
   };
   return (
     <CustomContext.Provider value={value}>{children}</CustomContext.Provider>
