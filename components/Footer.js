@@ -2,7 +2,6 @@ import wrapper from '../styles/Home.module.scss';
 import style from '../styles/Footer.module.scss';
 
 const Footer = (cart) => {
-  console.log(cart);
   return (
     <footer className={wrapper.wrapper}>
       {cart === true ? (

@@ -1,4 +1,4 @@
-import { createContext, useState } from 'react';
+import { createContext, useEffect, useState } from 'react';
 
 export const CustomContext = createContext();
 export const Context = ({ children }) => {
@@ -11,6 +11,16 @@ export const Context = ({ children }) => {
   const checkDistanse = (value) => {
     setDistance(value);
   };
+
+  useEffect(() => {
+    if (localStorage.getItem('cart') !== null) {
+      setCart(JSON.parse(localStorage.getItem('cart')));
+    }
+  }, []);
+
+  useEffect(() => {
+    localStorage.setItem('cart', JSON.stringify(cart));
+  }, [cart]);
 
   const normalDate = (date) => {
     const res = date.split('-').reverse();
@@ -49,8 +59,8 @@ export const Context = ({ children }) => {
 
   const addCart = (item) => {
     // const sameItem = cart.findIndex((e) => e.id === item.id);
-
     setCart([...cart, item]);
+    console.log(cart);
   };
 
   const value = {
@@ -65,6 +75,7 @@ export const Context = ({ children }) => {
     setFetch,
     normalDate,
     space,
+    addCart,
   };
   return (
     <CustomContext.Provider value={value}>{children}</CustomContext.Provider>

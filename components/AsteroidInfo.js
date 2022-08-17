@@ -6,15 +6,15 @@ import Link from 'next/link';
 import React, { useContext } from 'react';
 import { CustomContext } from './Context';
 
-const AsteroidInfo = ({ state }) => {
-  const { distance, normalDate, space } = useContext(CustomContext);
+const AsteroidInfo = ({ data }) => {
+  const { distance, normalDate, space, addCart } = useContext(CustomContext);
   const {
     id,
     close_approach_data,
     name,
     estimated_diameter,
     is_potentially_hazardous_asteroid,
-  } = state;
+  } = data;
 
   const { close_approach_date, miss_distance } = close_approach_data[0];
   const { estimated_diameter_max } = estimated_diameter.meters;
@@ -60,7 +60,20 @@ const AsteroidInfo = ({ state }) => {
         </ul>
       </div>
       <div className={style.AsteroidInfo_btn}>
-        <button>уничтожить</button>
+        <button
+          onClick={() =>
+            addCart({
+              id,
+              // name: name,
+              // date: normalDate(close_approach_date),
+              // danger: is_potentially_hazardous_asteroid,
+              // diametr: Math.ceil(estimated_diameter_max),
+              // velocity: space(Math.ceil(miss_distance[distance])),
+            })
+          }
+        >
+          уничтожить
+        </button>
       </div>
     </div>
   );
