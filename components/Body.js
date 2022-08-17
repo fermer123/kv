@@ -3,7 +3,7 @@ import style from '../styles/Body.module.scss';
 import { useContext } from 'react';
 import { CustomContext } from './Context';
 
-const Body = () => {
+const Body = ({ notshowdang }) => {
   const { checked, setChecked, checkDistanse } = useContext(CustomContext);
 
   return (
@@ -28,17 +28,21 @@ const Body = () => {
             </button>
           </div>
 
-          <div className={style.body_btn_danger}>
-            <input
-              className={style.body_btn_danger_btn}
-              type='checkbox'
-              value={checked}
-              onChange={() => setChecked(!checked)}
-            />
-            <div className={style.body_btn_danger_desc}>
-              Показать только опасные
+          {notshowdang === true ? (
+            ''
+          ) : (
+            <div className={style.body_btn_danger}>
+              <input
+                className={style.body_btn_danger_btn}
+                type='checkbox'
+                value={checked}
+                onChange={() => setChecked(!checked)}
+              />
+              <div className={style.body_btn_danger_desc}>
+                Показать только опасные
+              </div>
             </div>
-          </div>
+          )}
         </div>
       </div>
     </div>

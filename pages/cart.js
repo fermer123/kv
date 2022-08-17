@@ -59,7 +59,7 @@ const Cart = ({ pic }) => {
   return (
     <div className={wrapper.wrapper}>
       <Head data={pic} />
-      <Body />
+      <Body notshowdang={true} />
       <div className={wrapper.grid}>
         {checked
           ? currentItem
