@@ -7,7 +7,7 @@ import React, { useContext } from 'react';
 import { CustomContext } from './Context';
 
 const AsteroidInfo = ({ state }) => {
-  const { distance } = useContext(CustomContext);
+  const { distance, normalDate, space } = useContext(CustomContext);
   const {
     id,
     close_approach_data,
@@ -18,33 +18,6 @@ const AsteroidInfo = ({ state }) => {
 
   const { close_approach_date, miss_distance } = close_approach_data[0];
   const { estimated_diameter_max } = estimated_diameter.meters;
-  const normalDate = (date) => {
-    const res = date.split('-').reverse();
-    const months = {
-      1: 'января',
-      2: 'февраля',
-      3: 'марта',
-      4: 'апреля',
-      5: 'мая',
-      6: 'июня',
-      7: 'июля',
-      8: 'августа',
-      9: 'сентября',
-      10: 'октября',
-      11: 'ноября',
-      12: 'декабря',
-    };
-
-    res[1] =
-      months[
-        res[1]
-          .split('')
-          .filter((e) => e !== '0')
-          .join('')
-      ];
-
-    return res.join(' ');
-  };
 
   return (
     <div className={style.AsteroidInfo}>
@@ -78,7 +51,7 @@ const AsteroidInfo = ({ state }) => {
             Ø {Math.ceil(estimated_diameter_max)} м
           </li>
           <li className={style.AsteroidInfo_body_size}>
-            ↔ {Math.ceil(miss_distance[distance])}{' '}
+            ↔ {space(Math.ceil(miss_distance[distance]))}{' '}
             {distance === 'lunar' ? 'лунных орбит' : 'км'}
           </li>
           <li className={style.AsteroidInfo_body_danger}>

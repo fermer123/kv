@@ -101,12 +101,8 @@ const Home = ({ data, pic }) => {
         {checked
           ? currentItem
               .filter((e) => e.is_potentially_hazardous_asteroid === true)
-              .map((e) => (
-                <AsteroidInfo key={e.id} state={e} distance={distance} />
-              ))
-          : currentItem.map((e) => (
-              <AsteroidInfo key={e.id} state={e} distance={distance} />
-            ))}
+              .map((e) => <AsteroidInfo key={e.id} state={e} />)
+          : currentItem.map((e) => <AsteroidInfo key={e.id} state={e} />)}
       </div>
       <Footer />
     </div>

@@ -1,8 +1,8 @@
-import { useContext, useEffect } from 'react';
 import AsteroidCard from '../components/AsteroidCard';
 import Body from '../components/Body';
-import { CustomContext } from '../components/Context';
+
 import Head from '../components/Head';
+import wrapper from '../styles/Home.module.scss';
 
 const key = 'mQzujJfzbi1rzZeOq8XuJYgSI4P8qGevjZCYrVzZ';
 const date = new Date();
@@ -42,7 +42,7 @@ export const getServerSideProps = async (context) => {
 
 const Asteroid = ({ data, pic }) => {
   return (
-    <div>
+    <div className={wrapper.wrapper}>
       <Head data={pic} onclick={true} />
       <Body />
       <AsteroidCard data={data} />

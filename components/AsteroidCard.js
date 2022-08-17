@@ -8,31 +8,6 @@ import Image from 'next/image';
 
 const AsteroidCard = ({ data }) => {
   const { distance } = useContext(CustomContext);
-  const normalDate = (date) => {
-    const res = date.split('-').reverse();
-    const months = {
-      1: 'января',
-      2: 'февраля',
-      3: 'марта',
-      4: 'апреля',
-      5: 'мая',
-      6: 'июня',
-      7: 'июля',
-      8: 'августа',
-      9: 'сентября',
-      10: 'октября',
-      11: 'ноября',
-      12: 'декабря',
-    };
-    res[1] =
-      months[
-        res[1]
-          .split('')
-          .filter((e) => e[0] !== '0')
-          .join('')
-      ];
-    return res.join(' ');
-  };
 
   const time = (date) => {
     const res = date.split('-');
@@ -41,7 +16,7 @@ const AsteroidCard = ({ data }) => {
     return time[1];
   };
 
-  const { fetch, setFetch, itemsPerPage, setitemsPerPage } =
+  const { fetch, setFetch, itemsPerPage, setitemsPerPage, normalDate, space } =
     useContext(CustomContext);
   const lastItemIndex = itemsPerPage;
   const firstItemIndex = lastItemIndex - itemsPerPage;
@@ -72,8 +47,6 @@ const AsteroidCard = ({ data }) => {
     lastItemIndex,
   );
 
-  console.log(data);
-
   // По каждому астероиду: название, размер, оценка опасности,
   //  как близко будет к Земле, точная дата максимального
   //   подлёта. Иконка сближения в зависимости от опасности.
@@ -82,11 +55,11 @@ const AsteroidCard = ({ data }) => {
   //   //список всех его сближений. // По каждому сближению: скорость
   //   относительно Земли, // время максимального сближения с Землей, //
   //   расстояние до Земли, по орбите вокруг чего летит.
-
+  console.log(data);
   return (
     <div className={wrapper.grid}>
       {currentItem.map((e) => (
-        <div key={e.close_approach_date} className={style.AsteroidInfo}>
+        <div key={e.close_approach_date_full} className={style.AsteroidInfo}>
           {normalDate(e.close_approach_date)}
           <div className={style.AsteroidInfo_body}>
             <div className={style.AsteroidInfo_body_image}>
@@ -102,7 +75,7 @@ const AsteroidCard = ({ data }) => {
                 <Image src={podlet} placeholder='blur' alt='podlet' />
               )}
             </div>
-            <ul className={style.AsteroidInfo_body_info_app}>
+            <ul className={style.AsteroidInfo_body_info}>
               <li className={style.AsteroidInfo_body_name}>
                 Астеройд {data.name}
               </li>
@@ -114,7 +87,7 @@ const AsteroidCard = ({ data }) => {
                 м
               </li>
               <li className={style.AsteroidInfo_body_size}>
-                ↔ {Math.ceil(e.miss_distance[distance])}{' '}
+                ↔ {space(Math.ceil(e.miss_distance[distance]))}{' '}
                 {distance === 'lunar' ? 'лунных орбит' : 'км'}
               </li>
               <li className={style.AsteroidInfo_body_danger}>
@@ -123,19 +96,18 @@ const AsteroidCard = ({ data }) => {
                   : 'Не опасен'}
               </li>
             </ul>
-            <ul className={style.AsteroidInfo_body_info_opt}>
-              <li className={style.orbiting_body}>Орбита {e.orbiting_body}</li>
-
-              <li className={style.time}>
-                Время {time(e.close_approach_date_full)}
-              </li>
-              <li className={style.AsteroidInfo_body_danger}>
-                {data.is_potentially_hazardous_asteroid
-                  ? 'Опасен'
-                  : 'Не опасен'}
-              </li>
-            </ul>
           </div>
+          <ul className={style.AsteroidInfo_body_info_opt}>
+            <li className={style.orbiting_body}>Орбита {e.orbiting_body}</li>
+
+            <li className={style.time}>
+              Время {time(e.close_approach_date_full)}
+            </li>
+            <li className={style.time}>
+              Скорость {Math.round(e.relative_velocity.kilometers_per_hour)}{' '}
+              км/ч
+            </li>
+          </ul>
           <div className={style.AsteroidInfo_btn}>
             <button>уничтожить</button>
           </div>
