@@ -7,7 +7,7 @@ import { CustomContext } from './Context';
 
 const CartItem = ({ data }) => {
   const { distance, space, removeItem } = useContext(CustomContext);
-  const { id, date, danger, diametr, dist } = data;
+  const { id, date, danger, diametr, dist, name } = data;
 
   return (
     <div className={style.AsteroidInfo}>

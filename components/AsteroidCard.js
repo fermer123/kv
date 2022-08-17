@@ -7,17 +7,23 @@ import podlet from '../public/podlet.jpg';
 import Image from 'next/image';
 
 const AsteroidCard = ({ data }) => {
-  const { distance } = useContext(CustomContext);
+  const {
+    fetch,
+    setFetch,
+    itemsPerPage,
+    setitemsPerPage,
+    normalDate,
+    space,
+    distance,
+    addCart,
+  } = useContext(CustomContext);
 
   const time = (date) => {
     const res = date.split('-');
     const time = res[2].split(' ');
-
     return time[1];
   };
 
-  const { fetch, setFetch, itemsPerPage, setitemsPerPage, normalDate, space } =
-    useContext(CustomContext);
   const lastItemIndex = itemsPerPage;
   const firstItemIndex = lastItemIndex - itemsPerPage;
 
@@ -46,15 +52,6 @@ const AsteroidCard = ({ data }) => {
     firstItemIndex,
     lastItemIndex,
   );
-
-  // По каждому астероиду: название, размер, оценка опасности,
-  //  как близко будет к Земле, точная дата максимального
-  //   подлёта. Иконка сближения в зависимости от опасности.
-  //    Фильтр по опасности. И
-  //    опция вывода расстояний: в километрах или расстояниях до Луны.
-  //   //список всех его сближений. // По каждому сближению: скорость
-  //   относительно Земли, // время максимального сближения с Землей, //
-  //   расстояние до Земли, по орбите вокруг чего летит.
 
   return (
     <div className={wrapper.grid}>
@@ -109,7 +106,20 @@ const AsteroidCard = ({ data }) => {
             </li>
           </ul>
           <div className={style.AsteroidInfo_btn}>
-            <button>уничтожить</button>
+            <button
+              onClick={() =>
+                addCart({
+                  name: data.name,
+                  date: e.close_approach_date,
+                  danger: data.is_potentially_hazardous_asteroid,
+                  diametr:
+                    data.estimated_diameter.meters.estimated_diameter_max,
+                  dist: e.miss_distance,
+                })
+              }
+            >
+              уничтожить
+            </button>
           </div>
         </div>
       ))}
