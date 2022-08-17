@@ -58,11 +58,14 @@ export const Context = ({ children }) => {
   };
 
   const addCart = (item) => {
-    if (item.name !== cart.map((e) => e.name)) {
-      setCart([...cart, item]);
-    } else {
+    const sameItem = cart.findIndex(
+      (e) => e.name === item.name && e.date === item.date && e.id === item.id,
+    );
+    if (sameItem >= 0) {
       console.log('вы уже добавили данный астеройд на уничтожение');
-      return;
+      return item;
+    } else {
+      setCart([...cart, item]);
     }
   };
   const removeItem = () => {
